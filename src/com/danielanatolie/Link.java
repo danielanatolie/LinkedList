@@ -45,16 +45,6 @@ class LinkList {
         firstLink = newLink;
     }
 
-    public void insertLastLink(String bookName, int millionsSold) {
-        Link newLink = new Link(bookName, millionsSold);
-        Link theLink = firstLink;
-        while(theLink != null) {
-            theLink = theLink.next;
-        }
-        theLink = newLink;
-
-    }
-
     public Link removeFirst() {
         Link linkReference = firstLink;
         if(!isEmpty()) {
