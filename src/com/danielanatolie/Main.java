@@ -25,7 +25,6 @@ public class Main {
         list.insertFirstLink(node3);
         list.insertFirstLink(node2);
         list.insertFirstLink(node1);
-        list.deleteMiddleNode(list);
 
 
 

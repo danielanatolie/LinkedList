@@ -24,19 +24,91 @@ class linkedList {
     linkedList() {
         head = null;
     }
+    // 2.5
+    // Input: (7->1->6) + (5->9->2)
+    // Output: 2->1->9 (617 + 295=912), whole program works with reverse digits
+
+
     // 2.4
     // Partition a linkedlist around a value x:
     // - nodes < x come before nodes >= x
     // - if x is in the list already, only nodes < than it appear before it
     // - x(s) in this case does not need to be the left/right seperator
     // - ex. In: 3->5->8->5->10->2->1 [partition=5] Out: 3->1>2->10->5->5->8
+    //
+    // OPTION 1: // TODO: Option 1 Partition
+    // Uses 2 linked list, one for <x partition and one for >=x
+    // Param: Head node, partitioning value
+    public Node partition(Node node, int x) {
+        Node beforeStart = null;
+        Node beforeEnd = null;
+        Node afterStart = null;
+        Node afterEnd = null;
+
+        // Partition List
+        while(node != null) {
+            Node next = node.next; // Putting node's links into next
+            node.next = null; // Erasing node's links
+            if(node.data<x) {
+                // insert node into end of before list
+                if(beforeStart==null) {
+                    beforeStart = node;
+                    beforeEnd = beforeStart;
+                } else {
+                    beforeEnd.next = node;
+                    beforeEnd = node;
+                }
+            } else {
+                // insert node into end of after list
+                if(afterStart==null) {
+                    afterStart=node;
+                    afterEnd=afterStart;
+                } else {
+                    afterEnd.next = node;
+                    afterEnd=node;
+                }
+            }
+            node = next;
+        }
+
+        if(beforeStart ==null) {
+            return afterStart;
+        }
+
+        // List merge
+        beforeEnd.next = afterStart;
+        return beforeStart;
+    }
+
+    // OPTION 2:
+    public Node patitionV2(Node node, int x) {
+        Node head = node;
+        Node tail = node;
+        while(node != null) {
+            Node next = node.next;
+            if(node.data <x) {
+                // Insert node at the head
+                node.next = head;
+                head = node;
+            } else {
+                tail.next = node;
+                tail = node;
+            }
+            node = next;
+        }
+        tail.next = null;
+
+        // The head has changed, so we need to return it to the user
+        return head;
+    }
+
 
 
     // 2.3
     // Delete the first middle node (but not the first nor last), given access to it
     Boolean deleteMiddleNode(Node middleNode) {
         if(middleNode == null || middleNode.next == null) {
-            return false
+            return false;
         }
         Node next = middleNode.next;
         middleNode.data = next.data;
@@ -44,7 +116,7 @@ class linkedList {
         return true;
     }
 
-    // 2.2 - CONFUSED
+    // 2.2 - TODO: Recursion solution
     // Find kth to last element in singly linked list
     // OPTION 1:
     int printKthToLast(Node head, int k) {
