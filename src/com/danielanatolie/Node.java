@@ -25,6 +25,11 @@ class linkedList {
         head = null;
     }
     // 2.4
+    // Partition a linkedlist around a value x:
+    // - nodes < x come before nodes >= x
+    // - if x is in the list already, only nodes < than it appear before it
+    // - x(s) in this case does not need to be the left/right seperator
+    // - ex. In: 3->5->8->5->10->2->1 [partition=5] Out: 3->1>2->10->5->5->8
 
 
     // 2.3
